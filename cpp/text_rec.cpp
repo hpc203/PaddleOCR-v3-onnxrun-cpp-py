@@ -116,10 +116,9 @@ string TextRecognizer::predict_text(Mat cv_image)
 	}
 	
 	vector<int> no_repeat_blank_label;
-	for (size_t elementIndex = 1; elementIndex < w; ++elementIndex)
+	for (size_t elementIndex = 0; elementIndex < w; ++elementIndex)
 	{
-		if (preb_label[elementIndex] != 0 &&
-			preb_label[elementIndex - 1] != preb_label[elementIndex])
+		if (preb_label[elementIndex] != 0 && !(elementIndex > 0 && preb_label[elementIndex - 1] == preb_label[elementIndex]))
 		{
 			no_repeat_blank_label.push_back(preb_label[elementIndex] - 1);
 		}
